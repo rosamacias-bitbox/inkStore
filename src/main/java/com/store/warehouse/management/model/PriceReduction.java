@@ -10,6 +10,9 @@ public class PriceReduction {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @ManyToOne
+    private Item item;
+
     @Column
     private double reducedPrice;
 
