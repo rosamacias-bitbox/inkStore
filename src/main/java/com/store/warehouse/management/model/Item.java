@@ -40,8 +40,9 @@ public class Item {
     private Set<PriceReduction> priceReductions;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @NotNull
     private User user;
+
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Set<ItemDiscontinuedAction> discontinuedAction;
