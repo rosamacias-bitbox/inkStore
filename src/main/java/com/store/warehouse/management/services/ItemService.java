@@ -1,19 +1,16 @@
 package com.store.warehouse.management.services;
 
-import com.store.warehouse.management.model.Item;
-import com.store.warehouse.management.repositories.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.store.warehouse.management.dto.ItemDTO;
+import com.store.warehouse.management.model.entity.Item;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class ItemService {
+public interface ItemService {
 
-    @Autowired
-    private ItemRepository itemsRepository;
+    public List<ItemDTO> getItems() ;
+    public Optional<ItemDTO> getItemById(Long id);
+    public void saveItem(ItemDTO item);
+    public void deleteItem(Long id);
 
-    public List<Item> list() {
-        return itemsRepository.findAll();
-    }
 }
