@@ -12,19 +12,20 @@ public class ItemDiscontinuedAction {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column
+    private Date date;
+
+    @Column
+    private String description;
+
     @ManyToOne
     @JsonIgnore
     private Item item;
 
     @Column
-    private Date date;
-
-    @Column
     @JsonIgnore
     private User user;
 
-    @Column
-    private String description;
 
     public Long getId() {
         return id;

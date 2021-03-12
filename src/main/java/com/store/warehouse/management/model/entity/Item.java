@@ -1,10 +1,14 @@
 package com.store.warehouse.management.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store.warehouse.management.model.STATE;
 import com.store.warehouse.management.model.entity.ItemDiscontinuedAction;
 import com.store.warehouse.management.model.entity.PriceReduction;
 import com.store.warehouse.management.model.entity.Supplier;
 import com.store.warehouse.management.model.entity.User;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.mapping.FetchProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -43,16 +47,16 @@ public class Item {
     private Set<Supplier> suppliers;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
     private Set<PriceReduction> priceReductions;
 
     @ManyToOne
-    @NotNull
+    @Fetch(FetchMode.SELECT)
     private User user;
 
-
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
     private Set<ItemDiscontinuedAction> discontinuedAction;
-
 
     public Item() {
         this.state = STATE.AVAILABLE;
@@ -171,5 +175,11 @@ public class Item {
 
     public void setDiscontinuedAction(Set<ItemDiscontinuedAction> discontinuedAction) {
         this.discontinuedAction = discontinuedAction;
+    }
+
+    public void addDiscontinuedAction(ItemDiscontinuedAction discontinuedAction){
+        if (this.discontinuedAction == null)
+            this.discontinuedAction = new HashSet<ItemDiscontinuedAction>();
+        this.discontinuedAction.add(discontinuedAction);
     }
 }

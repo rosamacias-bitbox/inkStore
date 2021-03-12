@@ -10,7 +10,7 @@ public interface ItemService {
 
     public List<ItemDTO> getItems() ;
     public Optional<ItemDTO> getItemById(Long id);
-    public void saveItem(ItemDTO item);
+    public Optional<ItemDTO> saveItem(ItemDTO item);
     public void deleteItem(Long id);
 
 }
