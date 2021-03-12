@@ -1,4 +1,4 @@
-package com.store.warehouse.management.model;
+package com.store.warehouse.management.model.entity;
 
 import javax.persistence.*;
 import java.util.Set;

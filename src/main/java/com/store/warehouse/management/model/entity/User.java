@@ -1,5 +1,6 @@
-package com.store.warehouse.management.model;
+package com.store.warehouse.management.model.entity;
 
+import com.store.warehouse.management.model.UserRole;
 import com.store.warehouse.management.security.Authority;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -40,38 +41,25 @@ public class User implements UserDetails {
     @Size(min = 4, max = 255)
     private String password;
 
-    @Transient
-    private String passwordConfirm;
-
     @NotEmpty
     @Email
     @Size(max = 255)
     @Column(unique = true)
     private String email;
 
-    @Size(max = 20, message = "{store.phone.number.invalid}")
     // A simple phone number checker, allowing an optional international prefix
     // plus a variable number of digits that could be separated by dashes or
     // spaces
-    @Pattern(regexp = "^(\\+\\d+)?([ -]?\\d+){4,14}$", message = "{bakery.phone.number.invalid}")
+    @Pattern(regexp = "^(\\+\\d+)?([ -]?\\d+){4,14}$", message = "{store.warehouse.phone.number.invalid}")
     private String phoneNumber;
 
-
     public User() {
-
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
 
     public String getFirstname() {
         return firstname;

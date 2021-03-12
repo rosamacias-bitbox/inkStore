@@ -1,4 +1,6 @@
-package com.store.warehouse.management.model;
+package com.store.warehouse.management.model.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,12 +13,14 @@ public class ItemDiscontinuedAction {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     private Item item;
 
     @Column
     private Date date;
 
     @Column
+    @JsonIgnore
     private User user;
 
     @Column

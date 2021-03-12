@@ -1,4 +1,10 @@
-package com.store.warehouse.management.model;
+package com.store.warehouse.management.model.entity;
+
+import com.store.warehouse.management.model.STATE;
+import com.store.warehouse.management.model.entity.ItemDiscontinuedAction;
+import com.store.warehouse.management.model.entity.PriceReduction;
+import com.store.warehouse.management.model.entity.Supplier;
+import com.store.warehouse.management.model.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

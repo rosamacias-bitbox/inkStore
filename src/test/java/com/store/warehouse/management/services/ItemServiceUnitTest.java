@@ -1,6 +1,8 @@
 package com.store.warehouse.management.services;
 
-import com.store.warehouse.management.model.Item;
+import com.store.warehouse.management.dto.ItemDTO;
+import com.store.warehouse.management.model.entity.Item;
+import com.store.warehouse.management.services.impl.ItemServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +17,11 @@ import java.util.List;
 public class ItemServiceUnitTest {
 
     @Autowired
-    private ItemService itemService;
+    private ItemServiceImpl itemService;
 
         @Test
         public void whenApplicationStarts_thenHibernateCreatesInitialRecords() {
-            List<Item> items = itemService.list();
-            Assert.assertEquals(items.size(), 0);
+            List<ItemDTO> items = itemService.getItems();
+            Assert.assertEquals(items.size(), 1);
         }
     }

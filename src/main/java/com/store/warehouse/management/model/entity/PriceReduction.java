@@ -1,8 +1,7 @@
-package com.store.warehouse.management.model;
+package com.store.warehouse.management.model.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class PriceReduction {
