@@ -1,6 +1,8 @@
 package com.store.warehouse.management.services.impl;
 
+import com.store.warehouse.management.dto.ItemDTO;
 import com.store.warehouse.management.dto.UserDTO;
+import com.store.warehouse.management.model.entity.Item;
 import com.store.warehouse.management.model.entity.User;
 import com.store.warehouse.management.model.UserRole;
 import com.store.warehouse.management.repositories.UserRepository;
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired

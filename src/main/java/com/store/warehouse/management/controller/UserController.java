@@ -19,4 +19,10 @@ public class UserController {
     public List<UserDTO> findAll () {
         return userService.getUsers();
     }
+
+    @RequestMapping("/login")
+    public String login() {
+         return "login";
+    }
+
 }
