@@ -63,10 +63,10 @@ public class ItemServiceImpl implements ItemService {
         item.ifPresent(i->itemRepository.delete(i));
     }
 
+
     private User getLoggedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         return userRepository.findByUsername(username);
-
     }
 }

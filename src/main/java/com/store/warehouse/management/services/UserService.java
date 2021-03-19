@@ -1,8 +1,6 @@
 package com.store.warehouse.management.services;
 
-import com.store.warehouse.management.dto.ItemDTO;
 import com.store.warehouse.management.dto.UserDTO;
-import com.store.warehouse.management.model.entity.User;
 import com.store.warehouse.management.model.UserRole;
 
 import java.util.List;

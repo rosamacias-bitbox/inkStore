@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.websocket.server.PathParam;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("api/items")
 public class ItemController {
 
     @Autowired
@@ -23,8 +25,9 @@ public class ItemController {
     private UserService userService;
 
     @RequestMapping("/findAll")
-    public List<ItemDTO> findAll () {
-        return itemService.getItems();
+    public ResponseEntity<List<ItemDTO>> findAll () {
+        List<ItemDTO> items = itemService.getItems();
+        return ResponseEntity.ok().body(items);
     }
 
     @RequestMapping("/findById")
@@ -33,15 +36,23 @@ public class ItemController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity createItem(@RequestBody ItemDTO item) {
-        Optional<ItemDTO> itemDTO =  itemService.saveItem(item);
-        if (itemDTO.isEmpty())
-            new ResponseEntity("Error creating item", HttpStatus.BAD_REQUEST);
-        return ResponseEntity.ok("");
+    public ResponseEntity<ItemDTO> create(@RequestBody ItemDTO item) {
+        Optional<ItemDTO> savedItemDTO =  itemService.saveItem(item);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedItemDTO.get().getId())
+                .toUri();
+        return ResponseEntity.created(location).body(savedItemDTO.get());
     }
 
+
+
     @DeleteMapping("/delete")
-    public void deleteItem(@PathParam("id") Long id) {
+    public ResponseEntity<ItemDTO> delete(@PathParam("id") Long id) {
         itemService.deleteItem(id);
+        return ResponseEntity.noContent().build();
     }
+
+
+
 }

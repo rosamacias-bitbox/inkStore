@@ -1,5 +1,6 @@
 package com.store.warehouse.management.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store.warehouse.management.model.UserRole;
 import com.store.warehouse.management.security.Authority;
 import org.springframework.security.core.GrantedAuthority;
@@ -102,6 +103,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new Authority(role.name()));
@@ -124,14 +126,17 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
