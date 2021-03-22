@@ -2,15 +2,13 @@ package com.store.warehouse.management.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store.warehouse.management.model.UserRole;
-import com.store.warehouse.management.security.Authority;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -54,7 +52,26 @@ public class User implements UserDetails {
     @Pattern(regexp = "^(\\+\\d+)?([ -]?\\d+){4,14}$", message = "{store.warehouse.phone.number.invalid}")
     private String phoneNumber;
 
+
+
     public User() {
+    }
+
+    public User (Long id, String username, String email, String password,  UserRole role) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+
+    }
+
+    public static User build(User user) {
+        return new User(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getRole());
     }
 
     public Long getId() {
@@ -103,11 +120,10 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new Authority(role.name()));
-        return authorities;
+        List<GrantedAuthority> authorities =  new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority( getRole().name()));
+        return  authorities;
     }
 
     public String getPassword() {

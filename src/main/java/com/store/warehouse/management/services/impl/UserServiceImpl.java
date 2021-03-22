@@ -1,8 +1,6 @@
 package com.store.warehouse.management.services.impl;
 
-import com.store.warehouse.management.dto.ItemDTO;
 import com.store.warehouse.management.dto.UserDTO;
-import com.store.warehouse.management.model.entity.Item;
 import com.store.warehouse.management.model.entity.User;
 import com.store.warehouse.management.model.UserRole;
 import com.store.warehouse.management.repositories.UserRepository;
@@ -12,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -52,6 +52,8 @@ public class UserServiceImpl implements UserService {
         return Optional.of(modelMapper.map(optionalUser.get(), UserDTO.class));
     }
 
+
+
     @Override
     @Transactional
     public void createUser(UserDTO userDTO, UserRole role) {
@@ -76,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDTO userDTO) {
-
+        PasswordEncoder encoder =  PasswordEncoderFactories.createDelegatingPasswordEncoder();
         Optional<User> userOptional = Optional.ofNullable(modelMapper.map(userDTO, User.class));
         if (userOptional.isPresent()) {
             User user = userOptional.get();
