@@ -53,17 +53,18 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
-    @Transactional
     public void createUser(UserDTO userDTO, UserRole role) {
 
         Optional<User> userOptional = Optional.ofNullable(modelMapper.map(userDTO, User.class));
-        if (userOptional.isPresent()) {
-            User user = userRepository.findByUsername(userOptional.get().getUsername());
-            if (user != null) {
+        if (userOptional.isPresent())
+        {
+            User user = userOptional.get();
+            User existingUser = userRepository.findByUsername(user.getUsername());
+            if (existingUser != null){ //user already exists
                 LOG.info("User [ " + user.getUsername() + " ] with such username already exists.");
             } else {
+                //new user, not in the DB
                 user.setRole(role);
                 user = userRepository.save(user);
             }
@@ -78,11 +79,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDTO userDTO) {
-        PasswordEncoder encoder =  PasswordEncoderFactories.createDelegatingPasswordEncoder();
         Optional<User> userOptional = Optional.ofNullable(modelMapper.map(userDTO, User.class));
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            //user.setPassword(user.getPassword());
             userRepository.save(user);
         }
     }

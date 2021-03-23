@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -62,16 +62,18 @@ public class User implements UserDetails {
         this.username = username;
         this.email = email;
         this.password = password;
-
+        this.role = role;
     }
 
     public static User build(User user) {
+
         return new User(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
                 user.getRole());
+
     }
 
     public Long getId() {
