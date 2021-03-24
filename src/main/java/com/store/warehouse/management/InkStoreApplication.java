@@ -2,17 +2,14 @@ package com.store.warehouse.management;
 
 import com.store.warehouse.management.dto.UserDTO;
 import com.store.warehouse.management.model.UserRole;
-import com.store.warehouse.management.model.entity.User;
 import com.store.warehouse.management.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-//(exclude = {SecurityAutoConfiguration.class})
 @SpringBootApplication
 public class InkStoreApplication implements CommandLineRunner {
 
@@ -37,6 +34,6 @@ public class InkStoreApplication implements CommandLineRunner {
 		user1.setPassword(bCryptPasswordEncoder.encode("user1"));
 		user1.setEmail("rosmacias@gmail.com");
 
-		userService.createUser(user1, UserRole.ADMIN);
+		userService.createUser(user1, UserRole.USER);
 	}
 }

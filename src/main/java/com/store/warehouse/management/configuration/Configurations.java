@@ -14,6 +14,7 @@ public class Configurations {
         return new ModelMapper();
     }
 
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

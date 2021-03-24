@@ -1,11 +1,16 @@
 package com.store.warehouse.management.dto;
 
 
+import com.store.warehouse.management.model.entity.Item;
+
+import java.util.Set;
+
 public class SupplierDTO {
 
     private Long id;
     private String name;
     private String country;
+    //private Set<Item> items;
 
     public Long getId() {
         return id;
@@ -30,4 +35,15 @@ public class SupplierDTO {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    /*
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
+     */
 }

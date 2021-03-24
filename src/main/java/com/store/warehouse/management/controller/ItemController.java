@@ -4,7 +4,6 @@ import com.store.warehouse.management.dto.ItemDTO;
 import com.store.warehouse.management.services.ItemService;
 import com.store.warehouse.management.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -46,13 +45,10 @@ public class ItemController {
     }
 
 
-
     @DeleteMapping("/delete")
     public ResponseEntity<ItemDTO> delete(@PathParam("id") Long id) {
         itemService.deleteItem(id);
         return ResponseEntity.noContent().build();
     }
-
-
 
 }

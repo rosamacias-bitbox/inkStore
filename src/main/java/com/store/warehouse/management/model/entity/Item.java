@@ -56,6 +56,7 @@ public class Item {
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @Fetch(FetchMode.SUBSELECT)
+    @JsonIgnore
     private Set<ItemDiscontinuedAction> discontinuedAction;
 
     public Item() {

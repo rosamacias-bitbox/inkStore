@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
-public class PrIceReductionDTO {
+public class PriceReductionDTO {
 
     private Long id;
     private Item item;
