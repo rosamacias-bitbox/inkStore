@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
@@ -20,8 +21,10 @@ public class InkStoreApplication implements CommandLineRunner {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	//@Autowired
+	//private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -31,7 +34,7 @@ public class InkStoreApplication implements CommandLineRunner {
 		user1.setFirstname("-");
 		user1.setLastname("-");
 		user1.setUsername("user1");
-		user1.setPassword(bCryptPasswordEncoder.encode("user1"));
+		user1.setPassword(new BCryptPasswordEncoder().encode("user1"));
 		user1.setEmail("rosmacias@gmail.com");
 
 		userService.createUser(user1, UserRole.USER);

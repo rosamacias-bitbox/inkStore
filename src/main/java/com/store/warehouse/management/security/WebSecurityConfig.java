@@ -18,37 +18,56 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
-@Configuration
+
 @EnableWebSecurity
+@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
+    protected void configure(HttpSecurity http) throws Exception {
+
         http
-              .authorizeRequests().anyRequest().permitAll()
-              .and()
-              .csrf().disable().cors().disable()
-              .headers().frameOptions().disable()
-              .and()
-              .httpBasic();;
-/*
+                .csrf().disable().cors().disable()
+                .authorizeRequests()
+                .antMatchers("/signin").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .headers().frameOptions().disable();
+
+
+
+        /*
+        http
+                .authorizeRequests().anyRequest().permitAll()
+                .and()
+                .csrf().disable().cors().disable()
+                .headers().frameOptions().disable()
+                .and()
+                .httpBasic();
+
+
+
         http
                 .authorizeRequests()
                 .antMatchers("login").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("**").permitAll()
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/login")
                 .and()
                 .headers().frameOptions().disable()
                 .and()
                 .csrf().disable().cors().disable()
                 .httpBasic();
-         */
+
+
+ */
 
     }
 
@@ -63,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-/*
+
 
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler() {
@@ -79,5 +98,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationFailureHandler authenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();
     }
-*/
+
 }
