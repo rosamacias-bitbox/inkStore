@@ -2,13 +2,18 @@ package com.store.warehouse.management.security;
 
 public class AuthenticationResponse {
 
-    private String jwt;
+    private String token;
 
-    public AuthenticationResponse(String jwt) {
-        this.jwt = jwt;
+    private boolean ok;
+
+    private String message;
+
+    public AuthenticationResponse(String token) {
+        this.token = token;
+        this.ok = true;
     }
 
     public String getJwt() {
-        return jwt;
+        return token;
     }
 }
