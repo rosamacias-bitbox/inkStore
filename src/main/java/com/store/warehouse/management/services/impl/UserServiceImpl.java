@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService {
         return Optional.of(modelMapper.map(optionalUser.get(), UserDTO.class));
     }
 
+    @Override
+    public Optional<UserDTO> findById(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        return Optional.of(modelMapper.map(optionalUser.get(), UserDTO.class));
+    }
 
     @Override
     public void createUser(UserDTO userDTO, UserRole role) {

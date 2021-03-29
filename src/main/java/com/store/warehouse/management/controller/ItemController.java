@@ -45,6 +45,15 @@ public class ItemController {
         return ResponseEntity.created(location).body(savedItemDTO.get());
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<ItemDTO> update(@RequestBody ItemDTO item) {
+        Optional<ItemDTO> savedItemDTO =  itemService.saveItem(item);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedItemDTO.get().getId())
+                .toUri();
+        return ResponseEntity.created(location).body(savedItemDTO.get());
+    }
 
     @DeleteMapping("/delete")
     public ResponseEntity<ItemDTO> delete(@PathParam("id") Long id) {

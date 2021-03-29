@@ -27,10 +27,10 @@ public class InkStoreApplication implements CommandLineRunner {
 		UserDTO user1 = new UserDTO();
 		user1.setFirstname("-");
 		user1.setLastname("-");
-		user1.setUsername("user1");
-		user1.setPassword(new BCryptPasswordEncoder().encode("user1"));
+		user1.setUsername("rosa");
+		user1.setPassword(new BCryptPasswordEncoder().encode("rosa"));
 		user1.setEmail("rosmacias@gmail.com");
 
-		userService.createUser(user1, UserRole.USER);
+		userService.createUser(user1, UserRole.ADMIN);
 	}
 }

@@ -9,8 +9,9 @@ import java.util.Optional;
 public interface UserService {
 
     public List<UserDTO> getUsers();
-    Optional<UserDTO> findByUsername(String username);
-    Optional<UserDTO> findByEmail(String email);
+    public Optional<UserDTO> findById(Long id);
+    public Optional<UserDTO> findByUsername(String username);
+    public Optional<UserDTO> findByEmail(String email);
     public void createUser(UserDTO user, UserRole roles);
     public void createUser(UserDTO user);
     void saveUser(UserDTO user);
